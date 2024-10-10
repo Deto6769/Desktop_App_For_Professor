@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient; //to connect sql db
+
 namespace Desktop_App_For_Professor
 {
     public partial class Form_login : Form
@@ -37,33 +38,42 @@ namespace Desktop_App_For_Professor
             Close();
         }
 
+        
         private void button_login_Click(object sender, EventArgs e)
         {
             //call MY_DB.cs
             MY_DB db = new MY_DB();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
-            DataTable table = new DataTable();
-            MySqlCommand command = new MySqlCommand("SELECT * FROM mydb.user_info where 'User_Name' = @usn AND 'Student_id' = @pass", db.getConnection);
+            DataTable table_std = new DataTable();
+            //MySql db read
+            MySqlCommand command = new MySqlCommand(@"
+            SELECT s.*
+            FROM student_info s 
+            JOIN admin_info a
+            ON a.adm_username = @in_un AND a.adm_id = @in_id", db.getConnection);//("select * from student_info where admin_info.adm_username = @in_un and admin_info.adm_id = @in_id", db.getConnection);//("SELECT * FROM mydb.user_info where 'User_Name' = @usn AND 'Student_id' = @pass", db.getConnection);
 
             //under line take text boxes' input information as login access data.
-            command.Parameters.Add("@usn", MySqlDbType.VarChar).Value = textBox_account.Text; //account id is username, temporary
-            command.Parameters.Add("@pass", MySqlDbType.Int16).Value = textBox_password.Text; //password temporary user ID. change it as DB column type
+            command.Parameters.Add("@in_un", MySqlDbType.VarChar).Value = textBox_account.Text; //account id is username, temporary
+            command.Parameters.Add("@in_id", MySqlDbType.VarChar).Value = textBox_password.Text; //password temporary user ID. change it as DB column type
 
             adapter.SelectCommand = command;
 
-            adapter.Fill(table);
+            adapter.Fill(table_std);
 
-            if(table.Rows.Count > 0) //db exist
+            //check read succesful.
+            if (table_std.Rows.Count > 0) //reading db exist
             {
-                MessageBox.Show("YES");
+                this.DialogResult = DialogResult.OK;
             }
             else
             {
-                MessageBox.Show("NO");
+                MessageBox.Show("Invalid Username Or User ID", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
-
+        private void textBox_account_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

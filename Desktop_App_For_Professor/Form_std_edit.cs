@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace Desktop_App_For_Professor
 {
-    public partial class Form1 : Form
+    public partial class Form_std_edit : Form
     {
-        public Form1()
+        public Form_std_edit()
         {
             InitializeComponent();
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

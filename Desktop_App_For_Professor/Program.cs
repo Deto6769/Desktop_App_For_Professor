@@ -16,7 +16,20 @@ namespace Desktop_App_For_Professor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_login());
+            //Application.Run(new Form_login());
+
+            //start page is login form
+            Form_login fLogin = new Form_login();
+
+            //if login succesful, then move main form
+            if(fLogin.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new Form_main());
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
     }
 }

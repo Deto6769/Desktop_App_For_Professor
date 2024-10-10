@@ -24,7 +24,7 @@ namespace Desktop_App_For_Professor
         public static string server_password = "";//no password for root
         public static int port_num = 3306;
 
-        static string connect_info = @"Data Source=localhost;port=3306;Initial Catalog=MY_DB;User Id=root;password=''";//= "datasource=" + server_name + ";" + "port=" + port_num + ";" + "username=" + server_username + ";" + "password=" + server_password + ";" + "database=" + database_name;
+        static string connect_info = "server=localhost;uid=root;pwd=kotori1430;database=mydb";//@"Server=localhost;Database=mydb;User ID=root;Password=;SslMode=None;";//= "datasource=" + server_name + ";" + "port=" + port_num + ";" + "username=" + server_username + ";" + "password=" + server_password + ";" + "database=" + database_name;
 
         //the connection
         private MySqlConnection con = new MySqlConnection(connect_info); //con to connect
