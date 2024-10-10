@@ -53,6 +53,12 @@ namespace Desktop_App_For_Professor
                 if (student.insertStudent(stdf, stdl, stdusr, stdid, stdm))
                 {
                     MessageBox.Show("New Student Added", "Add Student", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //blank text box for next input
+                    textBox_first.Text = null;
+                    textBox_last.Text = null;
+                    textBox_username.Text = null;
+                    textBox_id.Text = null;
+                    textBox_email.Text = null;
                 }
                 else
                 {

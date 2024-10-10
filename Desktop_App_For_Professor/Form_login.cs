@@ -45,30 +45,42 @@ namespace Desktop_App_For_Professor
             MY_DB db = new MY_DB();
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
-            DataTable table_std = new DataTable();
+            DataTable table_adm = new DataTable(); //table to read admin info
+
+
             //MySql db read
+            /*
+            //previous version. check damin info then read student info. don't need to read std info on login page.
             MySqlCommand command = new MySqlCommand(@"
             SELECT s.*
             FROM student_info s 
             JOIN admin_info a
-            ON a.adm_username = @in_un AND a.adm_id = @in_id", db.getConnection);//("select * from student_info where admin_info.adm_username = @in_un and admin_info.adm_id = @in_id", db.getConnection);//("SELECT * FROM mydb.user_info where 'User_Name' = @usn AND 'Student_id' = @pass", db.getConnection);
+            ON a.adm_username = @in_un AND a.adm_password = @in_pw", db.getConnection);//("select * from student_info where admin_info.adm_username = @in_un and admin_info.adm_id = @in_id", db.getConnection);//("SELECT * FROM mydb.user_info where 'User_Name' = @usn AND 'Student_id' = @pass", db.getConnection);
+            */
+
+            //gxk220025 call admin info on sql then check login info exist.
+            MySqlCommand command = new MySqlCommand(@"
+            SELECT * 
+            FROM professor 
+            WHERE username = @in_un AND password = @in_pw", db.getConnection);
+
 
             //under line take text boxes' input information as login access data.
             command.Parameters.Add("@in_un", MySqlDbType.VarChar).Value = textBox_account.Text; //account id is username, temporary
-            command.Parameters.Add("@in_id", MySqlDbType.VarChar).Value = textBox_password.Text; //password temporary user ID. change it as DB column type
+            command.Parameters.Add("@in_pw", MySqlDbType.VarChar).Value = textBox_password.Text; //password temporary user ID. change it as DB column type
 
             adapter.SelectCommand = command;
 
-            adapter.Fill(table_std);
+            adapter.Fill(table_adm);
 
             //check read succesful.
-            if (table_std.Rows.Count > 0) //reading db exist
+            if (table_adm.Rows.Count > 0) //reading db exist
             {
                 this.DialogResult = DialogResult.OK;
             }
             else
             {
-                MessageBox.Show("Invalid Username Or User ID", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Account or Password", "Login Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
