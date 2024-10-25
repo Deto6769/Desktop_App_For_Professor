@@ -80,7 +80,14 @@
     <Compile Include="Form_std_edit.Designer.cs">
       <DependentUpon>Form_std_edit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_std_work.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_std_work.Designer.cs">
+      <DependentUpon>Form_std_work.cs</DependentUpon>
+    </Compile>
     <Compile Include="MY_DB.cs" />
+    <Compile Include="ProfessorSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STUDENT.cs" />
@@ -95,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_std_edit.resx">
       <DependentUpon>Form_std_edit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_std_work.resx">
+      <DependentUpon>Form_std_work.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -76,7 +76,15 @@ namespace Desktop_App_For_Professor
             //check read succesful.
             if (table_adm.Rows.Count > 0) //reading db exist
             {
+                //gxk220025 
+                // Store the logged-in professor's data in the session class
+                DataRow row = table_adm.Rows[0];  // Get the first (and only) row
+
+                ProfessorSession.Username = row["username"].ToString();  // Store the username
+                ProfessorSession.ProfessorId = Convert.ToInt32(row["id"]);  // Store the professor's ID
                 this.DialogResult = DialogResult.OK;
+
+                
             }
             else
             {

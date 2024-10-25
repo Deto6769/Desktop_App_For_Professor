@@ -13,6 +13,22 @@ namespace Desktop_App_For_Professor
     {
         MY_DB db = new MY_DB();
         //gxk220025 create function to add a new student to database
+
+        //current std info
+        public static int Id { get; set; }
+        public static string FirstName { get; set; }
+        public static string LastName { get; set; }
+        public static string Email { get; set; }
+
+        // Optionally, you can add a method to clear the data if needed
+        public static void ClearStudentInfo()
+        {
+            Id = 0;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Email = string.Empty;
+        }
+
         public bool insertStudent(String std_first, String std_last, String std_user, Int64 std_id, String std_email) // String std_tid //if use team_id
         {
             MySqlCommand command = new MySqlCommand("INSERT INTO student(first_name, last_name, username, id, email, team_id) VALUES (@fn,@ln,@usr,@sid,@smail, @tid)", db.getConnection);
